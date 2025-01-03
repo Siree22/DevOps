@@ -1,0 +1,18 @@
+/*exp 6
+docker --version
+docker pull ubuntu
+docker ps
+docker ps -a
+docker exec -it <container id> bash
+docker stop <con id>
+docker kill <cont id>
+docker images
+docker rm < cont id>
+docker rmi <image-id>
+*/
+/* exp 7
+create new folder : python-image new file : Dockerfile and app.py 
+then in app.py : import os print("This is my first image") print("Curr Dir is: ",os.getcwd()) -> 
+FROM python WORKDIR /app COPY . /app CMD["python3","app.py"] -> terminal -> new terminal -> cd .\python-image\ -> cls 
+-> docker build -t myfirstpythonapp . -> cls -> dockerrunmyfirstpythonapp -> docker run --name firstpyc myfirstpythonapp
+*/
