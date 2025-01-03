@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    demo: "app"
+  name: podtato-main
+  labels:
+    app: podtato-head
+    name: podtato-main
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: podtato-head
+      name: podtato-main
+  template:
+    metadata:
+      labels:
+        app: podtato-head
+        name: podtato-main
+    spec:
+      imagePullSecrets:
+      - name: my-secret
+      terminationGracePeriodSeconds: 5
+      containers:
+      - name: server
+        image: kaleoum/podtato-main:v0.1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9000
+        env:
+        - name: PORT
+          value: "9000"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9000
+          initialDelaySeconds: 20
+          periodSeconds: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: podtato-main
+  labels:
+    app: podtato-head
+    name: podtato-main
+spec:
+  selector:
+    app: podtato-head
+    name: podtato-main
+  ports:
+  - name: http
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  type: NodePort
