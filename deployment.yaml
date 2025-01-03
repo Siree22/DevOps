@@ -55,3 +55,10 @@ spec:
     protocol: TCP
     targetPort: 9000
   type: NodePort
+/*1 kubectl get ns
+2 kubectl config use-context docker-desktop
+docker pull kaleoum/podtato-main:v0.1.0
+3 kubectl apply -f "C:\Users\aksha\docker-app\deployment.yaml"
+4 kubectl get po
+5 kubectl port-forward svc/podtato-main 9000:9000
+*/
